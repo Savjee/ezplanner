@@ -1,12 +1,12 @@
 <x-app-layout>
 
-    @foreach($daterange as $date)
-        <h2>{{ $date->format('l j F') }}</h2>
+    @foreach($daterange as $dateWrapper)
+        <h2>{{ $dateWrapper['date']->format('l j F') }}</h2>
 
-        @foreach($sections as $section)
+        @foreach($dateWrapper['sections'] as $planningItem)
             <div>
-                <label>{{ $section }}</label><br>
-                <textarea></textarea>
+                <label>{{ $planningItem->section }}</label><br>
+                <livewire:planning-textarea :$planningItem />
             </div>
         @endforeach
 
