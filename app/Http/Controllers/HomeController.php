@@ -23,14 +23,25 @@ class HomeController extends Controller
             explode(",", env('SECTIONS'))
         );
 
-        $dateRange = $dateRange->map(function(Carbon $date) use($sections) {
+        // Fetch all future PlanningItem's in 1 go
+        $planningItems = PlanningItem::where('date', '>=', today())
+            ->get();
+
+        $dateRange = $dateRange->map(function(Carbon $date) use($sections, $planningItems) {
             return [
                 "date" => $date,
-                "sections" => $sections->map(function(string $section) use ($date) {
-                    return PlanningItem::firstOrCreate([
+                "sections" => $sections->map(function(string $section) use ($date, $planningItems) {
+                    $preExists = $planningItems->where('date', $date)
+                        ->where('section', $section)
+                        ->first();
+
+                    if($preExists){
+                        return $preExists;
+                    }
+
+                    return PlanningItem::create([
                         'date' => $date,
                         'section' => $section,
-                        // 'value' => Str::random(),
                     ]);
                 })
             ];
