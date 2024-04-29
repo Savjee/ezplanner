@@ -14,9 +14,7 @@
             <header>
                 <h1>EZPlanner</h1>
             </header>
-
-            HASS: {{ env('HASSIO_INGRESS_PATH') }}<br>
-
+            
             {{ $slot }}
         </main>
     </body>
