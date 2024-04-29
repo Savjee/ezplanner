@@ -50,6 +50,7 @@ class HomeController extends Controller
         // dd($dateRange);
 
         return view('welcome')
-            ->with('daterange', $dateRange);
+            ->with('daterange', $dateRange)
+            ->with('test', $request->header('X-Ingress-Path'));
     }
 }
