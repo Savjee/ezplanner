@@ -20,6 +20,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        echo "hi";
+        dd(request()->headers);
         if ($ingressPath = request()->header('X-Ingress-Path')) {
             $ingressUrl = rtrim(config('app.url'), '/') . $ingressPath;
             URL::forceRootUrl($ingressUrl);
