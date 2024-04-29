@@ -1,7 +1,11 @@
 <x-app-layout>
 
     @foreach($daterange as $dateWrapper)
-        <h2>{{ $dateWrapper['date']->format('l j F') }}</h2>
+        <h2>
+            {{ ucfirst($dateWrapper['date']->dayName) }}
+            {{ $dateWrapper['date']->day }}
+            {{ $dateWrapper['date']->monthName }}
+        </h2>
 
         @foreach($dateWrapper['sections'] as $planningItem)
             <div>
