@@ -26,7 +26,7 @@ class AppServiceProvider extends ServiceProvider
             URL::forceRootUrl($ingressPath);
             
             Livewire::setUpdateRoute(function ($handle) use ($ingressPath) {
-                return Route::post($ingressPath . '/livewire/update', $handle);
+                return Route::post($ingressPath . '/livewire/update', $handle)->prefix('api');
             });
         }
     }
