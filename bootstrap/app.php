@@ -12,7 +12,11 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        $middleware->validateCsrfTokens(except: [
+            // Disable CSRF validation everywhere, until I figure out how
+            // to get it to work within an iframe from Home Assistant.
+            '*',
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
