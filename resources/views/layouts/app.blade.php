@@ -14,8 +14,10 @@
             <header>
                 <h1>EZPlanner</h1>
             </header>
-            
+
             {{ $slot }}
         </main>
+
+        @livewireScriptConfig
     </body>
 </html>
