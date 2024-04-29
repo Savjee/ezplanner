@@ -23,6 +23,3 @@ FROM serversideup/php:beta-8.3-unit
 
     # Copy the built assets
     COPY --chown=www-data:www-data --from=asset-build /build/public/build public/build
-
-    # Generate a artisan
-    RUN php artisan key:generate
