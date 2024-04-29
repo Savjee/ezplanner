@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
+use Livewire\Livewire;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -20,10 +22,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        echo "hi";
-        echo request()->headers;
         if ($ingressPath = request()->header('X-Ingress-Path')) {
             URL::forceRootUrl($ingressPath);
+            
+            Livewire::setUpdateRoute(function ($handle) use ($ingressPath) {
+                return Route::post($ingressPath . '/livewire/update', $handle);
+            });
         }
     }
 }
