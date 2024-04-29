@@ -5,7 +5,7 @@
 
         @foreach($dateWrapper['sections'] as $planningItem)
             <div>
-                <label>{{ $planningItem->section }}</label><br>
+                <label>{{ $planningItem->section }}</label>
                 <livewire:planning-textarea :$planningItem />
             </div>
         @endforeach

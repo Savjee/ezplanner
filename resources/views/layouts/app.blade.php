@@ -10,10 +10,11 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body>
-        <header>
-            <h1>EZPlanner</h1>
-        </header>
         <main>
+            <header>
+                <h1>EZPlanner</h1>
+            </header>
+
             {{ $slot }}
         </main>
     </body>

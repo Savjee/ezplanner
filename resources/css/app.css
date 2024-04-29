@@ -2,13 +2,22 @@ body {
     font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial,
         sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
         "Segoe UI Symbol";
-    /* max-width: 500px; */
-    /* margin: 0 auto; */
+}
+
+main{
     padding: 10px;
+    max-width: 500px;
+    margin: 0 auto;
 }
 
 h2{
     border-bottom: solid 1px #000;
+}
+
+label{
+    display: block;
+    font-weight: bold;
+    padding-bottom: 5px;
 }
 
 textarea{
