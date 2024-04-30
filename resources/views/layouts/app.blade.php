@@ -19,5 +19,9 @@
         </main>
 
         @livewireScriptConfig
+        <script>
+            const newUrl = "{{ config('app.url') . '/livewire/update' }}".replace('//', '/');
+            window.livewireScriptConfig.uri = newUrl;
+        </script>
     </body>
 </html>
