@@ -1,8 +1,5 @@
 <x-app-layout>
 
-    HASS: {{ $test ?? "Empty" }}<br>
-
-
     @foreach($daterange as $dateWrapper)
         <h2>
             {{ ucfirst($dateWrapper['date']->dayName) }}
