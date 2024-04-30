@@ -33,4 +33,4 @@ FROM serversideup/php:beta-8.3-unit
     COPY --chown=www-data:www-data --from=asset-build /build/public/build public/build
 
     # Persist the database
-    VOLUME database/sqlite
+    VOLUME /var/www/html/database/sqlite
