@@ -1,9 +1,11 @@
+# Use Composer to grab all PHP dependencies
 FROM serversideup/php:beta-8.3-cli as php-dependencies
     WORKDIR /build
     COPY --chown=www-data:www-data . .
     RUN composer install --no-dev
 
-# Build JS and CSS assets with Vite
+# Build JS and CSS assets with Vite. Here we need the PHP dependencies to
+# get the Livewire source
 FROM node:lts as asset-build
     WORKDIR /build
     COPY . .
@@ -11,11 +13,11 @@ FROM node:lts as asset-build
     RUN npm install
     RUN npm run build
 
-# Build an image to run EZPlanner
+# Build the actual image to run EZPlanner
 FROM serversideup/php:beta-8.3-unit
     WORKDIR /var/www/html
 
-    ENV SECTIONS="Wij,Lewis,Vince,TestDocker"
+    ENV SECTIONS="Wij,Lewis,Vince"
 
     # Enable Laravel automations from serversideup
     # Ie: migrate database, link storage, cache config & routes, etc.
@@ -24,9 +26,11 @@ FROM serversideup/php:beta-8.3-unit
     # Copy the main Laravel app
     COPY --chown=www-data:www-data . .
 
-    # Install dependencies
+    # Copy dependencies
     COPY --chown=www-data:www-data --from=php-dependencies /build .
-    # RUN composer install --no-dev
 
     # Copy the built assets
     COPY --chown=www-data:www-data --from=asset-build /build/public/build public/build
+
+    # Persist the database
+    VOLUME database/sqlite
