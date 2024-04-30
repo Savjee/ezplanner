@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
@@ -23,11 +24,14 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         if ($ingressPath = request()->header('X-Ingress-Path')) {
-            URL::forceRootUrl($ingressPath);
+            // URL::forceRootUrl($ingressPath);
             
-            Livewire::setUpdateRoute(function ($handle) use ($ingressPath) {
-                return Route::post($ingressPath . '/livewire/update', $handle)->prefix('api');
-            });
+            Config::set('app.url', $ingressPath);
+            Config::set('app.asset_url', $ingressPath);
+
+            // Livewire::setUpdateRoute(function ($handle) use ($ingressPath) {
+            //     return Route::post($ingressPath . '/livewire/update', $handle);
+            // });
         }
     }
 }
