@@ -37,3 +37,5 @@ FROM serversideup/php:beta-8.3-unit
     RUN chown -R www-data:www-data /data
 
     USER www-data
+
+    VOLUME /data
