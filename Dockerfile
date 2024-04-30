@@ -31,5 +31,8 @@ FROM serversideup/php:beta-8.3-unit
 
     # Copy the built assets
     COPY --chown=www-data:www-data --from=asset-build /build/public/build public/build
+   
+    USER root
+    RUN mkdir /data
 
     VOLUME ["/data"]
