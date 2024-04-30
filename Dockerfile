@@ -17,8 +17,6 @@ FROM node:lts as asset-build
 FROM serversideup/php:beta-8.3-unit
     WORKDIR /var/www/html
 
-    ENV SECTIONS="Wij,Lewis,Vince"
-
     # Enable Laravel automations from serversideup
     # Ie: migrate database, link storage, cache config & routes, etc.
     ENV AUTORUN_ENABLED=true
@@ -31,6 +29,3 @@ FROM serversideup/php:beta-8.3-unit
 
     # Copy the built assets
     COPY --chown=www-data:www-data --from=asset-build /build/public/build public/build
-
-    # Persist the database
-    VOLUME /var/www/html/database/sqlite
