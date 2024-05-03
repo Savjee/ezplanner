@@ -6,7 +6,7 @@ FROM serversideup/php:8.3-cli-alpine as php-dependencies
 
 # Build JS and CSS assets with Vite. Here we need the PHP dependencies to
 # get the Livewire source
-FROM node:lts as asset-build
+FROM node:lts-slim as asset-build
     WORKDIR /build
     COPY . .
     COPY --chown=www-data:www-data --from=php-dependencies /build /build/
