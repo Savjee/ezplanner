@@ -1,5 +1,5 @@
 # Use Composer to grab all PHP dependencies
-FROM serversideup/php:beta-8.3-cli as php-dependencies
+FROM serversideup/php:8.3-cli-alpine as php-dependencies
     WORKDIR /build
     COPY --chown=www-data:www-data . .
     RUN composer install --no-dev
@@ -14,7 +14,7 @@ FROM node:lts as asset-build
     RUN npm run build
 
 # Build the actual image to run EZPlanner
-FROM serversideup/php:beta-8.3-unit
+FROM serversideup/php:8.3-unit
     WORKDIR /var/www/html
 
     # Enable Laravel automations from serversideup
