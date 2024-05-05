@@ -16,7 +16,7 @@ class HomeController extends Controller
     public function __invoke(Request $request)
     {
         $dateRange = collect(
-            CarbonPeriod::create('today', '1 day', 10)
+            CarbonPeriod::create('today', '1 day', 20)
         );
 
         $sections = collect(
