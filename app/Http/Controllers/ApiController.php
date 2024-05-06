@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\PlanningItemResource;
 use App\Models\PlanningItem;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 
 class ApiController extends Controller
 {
@@ -16,6 +16,21 @@ class ApiController extends Controller
 
         return response()->json(
             PlanningItemResource::collection($todayItems)
+        );
+    }
+
+    public function overview(): JsonResponse
+    {
+        $items = PlanningItem::where('date', '>=', today())
+            ->get()
+            ->groupBy("date");
+
+        $output = $items->map(function(Collection $itemsInDate){
+            return PlanningItemResource::collection($itemsInDate);
+        });
+ 
+        return response()->json(
+            $output
         );
     }
 }
