@@ -26,11 +26,15 @@ class ApiController extends Controller
             ->groupBy("date");
 
         $output = $items->map(function(Collection $itemsInDate){
-            return PlanningItemResource::collection($itemsInDate);
+            $itemCollection = PlanningItemResource::collection($itemsInDate);
+            return [
+                'date' => $itemCollection->first()->date,
+                'data' => $itemCollection,
+            ];
         });
  
         return response()->json(
-            $output
+            $output->values()
         );
     }
 }
