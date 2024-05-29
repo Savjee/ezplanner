@@ -8,13 +8,15 @@
         </h2>
 
         @foreach($dateWrapper['sections'] as $planningItem)
-            <div>
-                <label>{{ $planningItem->section }}</label>
-                <livewire:planning-textarea :$planningItem />
+            <div class="flex">
+                <label style="width: 80px;">{{ $planningItem->section }}</label>
+                <div style="flex: 1;">
+                    <livewire:planning-textarea :$planningItem/>
+                </div>
             </div>
         @endforeach
 
-        <br><br>
+        <br>
     @endforeach
     
 </x-app-layout>
