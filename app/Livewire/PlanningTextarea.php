@@ -20,6 +20,10 @@ class PlanningTextarea extends Component
 
     public function updated($name, $value) 
     {
+        if(!isset($value) || $value == null || $value == ''){
+            return;
+        }
+
         if($name === 'planningItem.value'){
             $this->planningItem->value = $value;
             $this->planningItem->save();
