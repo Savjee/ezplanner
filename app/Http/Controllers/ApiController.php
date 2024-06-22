@@ -23,6 +23,7 @@ class ApiController extends Controller
     public function overview(): JsonResponse
     {
         $items = PlanningItem::where('date', '>=', today())
+            ->whereNotNull('value')
             ->get()
             ->groupBy("date");
 
