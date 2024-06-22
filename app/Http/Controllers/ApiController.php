@@ -12,6 +12,7 @@ class ApiController extends Controller
     public function today(): JsonResponse
     {
         $todayItems = PlanningItem::where('date', today())
+            ->whereNotNull('value')
             ->get();
 
         return response()->json(
